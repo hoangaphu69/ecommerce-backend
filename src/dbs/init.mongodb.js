@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const connectString = `mongodb://localhost:27017/NgoaLongMongo`
+const connectString = `mongodb://localhost:27017/pubpy-ecommerce`
 
 class Database {
     constructor() {
@@ -16,10 +16,17 @@ class Database {
             mongoose.set('debug', { color: true })
         }
 
-        mongoose.connect(connectString).then(_ => {
-            console.log(`Connected Mongodb Success PRO`, countConnect())
+        // mongoose.connect(connectString).then(_ => {
+        //     console.log(`Connected Mongodb Success PRO`, countConnect())
+        // })
+        //     .catch(err => console.log(`Error Connect!`))
+
+        mongoose.connect(connectString, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
         })
-            .catch(err => console.log(`Error Connect!`))
+        .then(() => console.log('Connected to MongoDB!'))
+        .catch(err => console.error('Error Connect!', err));
     }
 
     static getInstance() {
